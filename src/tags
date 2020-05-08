@@ -1,0 +1,57 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+add_queue	queue.c	/^void	add_queue(t_meta *d, int value)$/;"	f
+add_to_link	links.c	/^static void	add_to_link(t_meta *d, int from, int to, int val)$/;"	f	file:
+assign_path	print_result.c	/^static void	assign_path(t_meta *d, t_ant *a)$/;"	f	file:
+bfs	first_pass_bfs.c	/^static int bfs(t_meta *d)$/;"	f	file:
+concat	read_file.c	/^static void	concat(char *dst, char *src)$/;"	f	file:
+count_links	get_links.c	/^static int		count_links(t_meta *d)$/;"	f	file:
+count_rooms	get_rooms.c	/^static int	count_rooms(char *str)$/;"	f	file:
+create_queue	queue.c	/^int			create_queue(t_meta *d)$/;"	f
+division	print_result.c	/^static void	division(t_meta *d, t_ant *ant_list)$/;"	f	file:
+eval_group	solve.c	/^int		eval_group(t_meta *d, t_group g)$/;"	f
+find_group	find_group.c	/^t_group find_group(t_meta *d)$/;"	f
+first_pass_bfs	first_pass_bfs.c	/^t_path first_pass_bfs(t_meta *d)$/;"	f
+get_ants	parsing.c	/^int	get_ants(t_meta *d)$/;"	f
+get_comment	get_rooms.c	/^static int	get_comment(t_meta *d, int n)$/;"	f	file:
+get_index	parsing.c	/^int	get_index(t_meta *d, char *room) \/\/ OPTIMIZE WITH MUCH BETTER SHIT$/;"	f
+get_link	links.c	/^int	get_link(t_meta *d, int *matrix, int from, int to)$/;"	f
+get_links	get_links.c	/^int		get_links(t_meta *d)$/;"	f
+get_name	get_rooms.c	/^static int	get_name(t_meta *d, int n)$/;"	f	file:
+get_rooms	get_rooms.c	/^int	get_rooms(t_meta *d)$/;"	f
+init_bfs	first_pass_bfs.c	/^static int	init_bfs(t_meta *d, t_path *p)$/;"	f	file:
+init_find_group	find_group.c	/^static int init_find_group(t_meta *d, t_group *g, t_path *p)$/;"	f	file:
+init_solution	solve.c	/^int	init_solution(t_meta *d)$/;"	f
+main	main.c	/^int		main(void)$/;"	f
+max_path_len	steps.c	/^static int	max_path_len(t_group g)$/;"	f	file:
+move_ant	print_result.c	/^static void	move_ant(t_meta *d, t_ant *a, int ant)$/;"	f	file:
+next_node	find_group.c	/^static int		next_node(t_meta *d, int current)$/;"	f	file:
+next_node	first_pass_bfs.c	/^static int	next_node(t_meta *d, int node)$/;"	f	file:
+parsing	parsing.c	/^int		parsing(t_meta *d)$/;"	f
+path_len	links.c	/^int path_len(t_meta *d)$/;"	f
+path_remove	links.c	/^void path_remove(t_meta *d, t_path p, int *matrix)$/;"	f
+path_size	find_group.c	/^static int		path_size(t_meta *d)$/;"	f	file:
+path_update	links.c	/^int		path_update(t_meta *d, t_path p)$/;"	f
+pathfinder	find_group.c	/^static t_path 		pathfinder(t_meta *d)$/;"	f	file:
+print_group	main.c	/^void	print_group(t_meta *d, t_group g)$/;"	f
+print_matrix	main.c	/^void	print_matrix(t_meta *d, int n)$/;"	f
+print_path	main.c	/^void	print_path (t_meta *d, t_path p)$/;"	f
+print_result	print_result.c	/^void	print_result(t_meta *d)$/;"	f
+print_rooms	solve.c	/^void	print_rooms(t_meta *d)$/;"	f
+queue_next	queue.c	/^int			queue_next(t_meta *d)$/;"	f
+read_file	read_file.c	/^char	*read_file(void)$/;"	f
+read_links	get_links.c	/^static int	read_links(t_meta *d, int links)$/;"	f	file:
+realloc_and_copy	read_file.c	/^static char *realloc_and_copy(char *read_buff, int size)$/;"	f	file:
+reset_queue	queue.c	/^void		reset_queue(t_meta *d)$/;"	f
+sender	print_result.c	/^static void	sender(t_meta *d, t_ant *a)$/;"	f	file:
+skip_comment	get_links.c	/^static int skip_comment(t_meta *d, int i)$/;"	f	file:
+solve	solve.c	/^int	solve(t_meta *d)$/;"	f
+sort_group	find_group.c	/^static void	sort_group(t_group *g)$/;"	f	file:
+steps	steps.c	/^int	steps(t_meta *d, t_group g)$/;"	f
+total_len	steps.c	/^static int	total_len(t_group g)$/;"	f	file:
+write_link	get_links.c	/^static void	write_link(t_meta *d, int first, int second)$/;"	f	file:
+zero_out_link	links.c	/^static void	zero_out_link(t_meta *d, int from, int to, int *matrix)$/;"	f	file:
