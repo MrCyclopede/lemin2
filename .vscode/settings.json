@@ -1,7 +1,4 @@
 {
     "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
-    "files.associations": {
-        "lemin.h": "c"
-    }
+    "python.linting.enabled": true
 }
