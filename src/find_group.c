@@ -6,7 +6,7 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 03:05:42 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/03/12 03:11:46 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/05/10 21:59:14 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		next_node(t_meta *d, int current)
 	i = 0;
 	while (i < d->room_total)
 	{
-		if (get_link(d, d->edge_copy, current, i) == 1)
+		if (get_link(d, d->edge_copy, current, i) == 1 && !d->visited[i])
 			return (i);
 		i++;
 	}
@@ -71,6 +71,7 @@ static t_path 		pathfinder(t_meta *d)
 			return (p);
 		}
 		current_node = node;
+		d->visited[node] = 1;
 		i++;
 	}
 	p.size = 0;
@@ -110,6 +111,7 @@ static int init_find_group(t_meta *d, t_group *g, t_path *p)
 	if(!(g->path_list = (t_path *)ft_memalloc(sizeof(t_path) * d->max_path)))
 		return (ERROR);
 	ft_bzero(p, sizeof(t_path));
+	ft_bzero(d->visited, sizeof(int) * d->room_total);
 	ft_bzero(d->edge_copy, sizeof(int) * (d->room_total * d->room_total));
 	ft_memcpy(d->edge_copy, d->edge_matrix, sizeof(int) 
 			* (d->room_total * d->room_total));
