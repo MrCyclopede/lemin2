@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = lem-in
-CC = gcc
+CC = clang
 CFLAGS = -Wall -Wextra -Werror -g
 
 LIB_PATH = libft
@@ -38,7 +38,7 @@ SRC = 	main.c parsing.c read_file.c get_rooms.c solve.c queue.c \
 all: $(NAME)
 
 $(NAME): obj $(OBJS) $(LIB) $(HEADER)
-	$(CC) $(CFLAGS) $(INC_FLAG) $(LIB_LINK) -o $@ $(OBJS)
+	$(CC) $(OBJS) $(CFLAGS) $(INC_FLAG) $(LIB_LINK)  -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
 	$(CC) $(CFLAGS) -I $(LIB_PATH) -I $(INC_DIR) -c $< -o $@
@@ -50,7 +50,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -I $(LIB_PATH) -I $(INC_DIR) -c $< -o $@
 
 obj:
-	mkdir -pv obj
+	mkdir -p obj
 
 clean:
 	make -C $(LIB_PATH) clean
