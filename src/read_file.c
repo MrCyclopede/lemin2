@@ -34,7 +34,10 @@ static char *realloc_and_copy(char *read_buff, int size)
 	char *new;
 
 	if (!(new = (char *)malloc(size + 1)))
+	{
+		free(read_buff);
 		return (NULL);
+	}
 	ft_bzero(new, size + 1);
 	if (read_buff)
 		concat(new, read_buff);
@@ -97,5 +100,6 @@ char	*read_file(void)
 				read(STDIN_FILENO, &read_buff[ft_strlen(read_buff)], size / 2))
 			finished_reading = 1;
 	}
+	printf("[[%p]]\n", read_buff);
 	return (read_buff);
 }

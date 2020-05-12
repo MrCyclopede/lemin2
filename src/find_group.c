@@ -51,7 +51,6 @@ static t_path 		pathfinder(t_meta *d)
 	int current_node;
 	int i;
 
-
 	ft_bzero(&p, sizeof(t_path));
 	if ((p.size = path_size(d)) < 0)
 		return (p);
@@ -106,7 +105,7 @@ static void	sort_group(t_group *g)
 
 static int init_find_group(t_meta *d, t_group *g, t_path *p)
 {
-	(void)d;
+	(void)d;	
 	ft_bzero(g, sizeof(t_group));
 	if(!(g->path_list = (t_path *)ft_memalloc(sizeof(t_path) * d->max_path)))
 		return (ERROR);

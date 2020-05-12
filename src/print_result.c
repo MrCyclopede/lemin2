@@ -92,5 +92,6 @@ void	print_result(t_meta *d)
 	assign_path(d, a);
 
 	sender(d, a);
+	free(a);
 	return ;
 }

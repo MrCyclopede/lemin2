@@ -126,16 +126,19 @@ int		main(void)
 	
 	ft_bzero(&d, sizeof(t_meta));
 	if(!parsing(&d))
-	{
-		ft_putstr("parsing error\n");
+	{	
+		free_meta(&d);
+		ft_putstr("ERROR\n");
 		return (ERROR);
 	}
 	if (!(solve(&d)))
-	{
-		ft_putstr("solving error\n");
+	{		
+		free_meta(&d);
+		ft_putstr("ERROR\n");
 		return (ERROR);
 	}
-
+	
 	print_result(&d);
+	free_meta(&d);
 	return (0);
 }

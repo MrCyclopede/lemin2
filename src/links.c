@@ -46,13 +46,17 @@ int		path_update(t_meta *d, t_path p)
 
 	i = 0;
 	if (p.size <= 0)
+	{	
+		free(p.rooms);
 		return (ERROR);
+	}
 	while (i < p.size - 1)
 	{
 		add_to_link(d, p.rooms[i], p.rooms[i + 1], -1);
 		add_to_link(d, p.rooms[i + 1], p.rooms[i], 1);
 		i++;
-	}
+	}		
+	free(p.rooms);
 	return (SUCCESS);
 }
 

@@ -63,7 +63,9 @@ typedef struct 	s_links
 
 typedef struct	s_meta
 {
+	
 	char *parsing;
+	char *og_parsing;	
 	char **room_name;
 
 	int start; 		// set to -1 
@@ -73,10 +75,6 @@ typedef struct	s_meta
 	int room_total;
 
 	t_links *l;
-
-
-
-
 
 	t_group	best;
 
@@ -117,4 +115,7 @@ int			create_queue(t_meta *d);			//
 int			queue_next(t_meta *d);			//
 void		add_queue(t_meta *d, int value);
 void		reset_queue(t_meta *d);
+//########### FREE_MEMORY ###################//
+void 		free_pathlist_rooms(int max_path, t_group *g);
+int		free_meta(t_meta *d);
 #endif 
