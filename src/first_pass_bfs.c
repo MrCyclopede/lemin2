@@ -58,7 +58,7 @@ static int bfs(t_meta *d)
 static int	init_bfs(t_meta *d, t_path *p)
 {
 	int i;
-
+	
 	ft_bzero(p, sizeof(t_path));
 	i = 0;
 	while(i < d->room_total)
@@ -82,7 +82,7 @@ t_path first_pass_bfs(t_meta *d)
 	p.size = bfs(d);
 	if (p.size)
 	{
-		if (!(p.rooms = (int *)ft_memalloc(sizeof(int) * p.size)))
+		if (!(p.rooms = (int *)ft_memalloc(sizeof(int) * (p.size + 1))))
 		{
 			p.size = 0;
 			return (p);
