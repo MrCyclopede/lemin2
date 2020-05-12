@@ -102,7 +102,7 @@ int		get_next_line(int const fd, char **line)
 	char			buff[BUFF_SIZE + 1];
 	int				ret;
 
-	if (fd < 0 || OPEN_MAX <= fd || BUFF_SIZE <= 0 || !line)
+	if (fd < 0 || FOPEN_MAX <= fd || BUFF_SIZE <= 0 || !line)
 		return (-1);
 	if (!begin_list)
 		begin_list = ft_fresh_link(fd, &begin_list);
