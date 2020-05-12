@@ -17,12 +17,9 @@ int		eval_group(t_meta *d, t_group g)
 	int s;
 
 	s = steps(d, g);
-	
-	printf("S = %d", s);
 	if (s < 0)
 	{ 
 		free_pathlist_rooms(d->max_path, &g);	
-		printf("free depuis evealuat\n");
 		free(g.path_list);
 		return (ERROR);
 	}
@@ -30,7 +27,6 @@ int		eval_group(t_meta *d, t_group g)
 	{
 		if (d->best.path_list)
 		{
-			printf("free depuis eval meilleur\n");
 			free_pathlist_rooms(d->max_path, &d->best);
 			free(d->best.path_list);
 		}
@@ -40,7 +36,6 @@ int		eval_group(t_meta *d, t_group g)
 	else
 	{
 		free_pathlist_rooms(d->max_path, &g);
-		printf("free depuis evealuati0000");
 		free(g.path_list);
 	}
 	return (SUCCESS);

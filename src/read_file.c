@@ -33,7 +33,7 @@ static char *realloc_and_copy(char *read_buff, int size)
 {
 	char *new;
 
-	if (!(new = (char *)malloc(size + 1)))
+	if (!(new = (char *)malloc(sizeof(char) * (size + 1))))
 	{
 		free(read_buff);
 		return (NULL);
@@ -54,7 +54,7 @@ char	*read_file(void)
 	int finished_reading;
 	int fd;
 
-	fd = open("/Users/rcourtoi/42/lemin_github/maps/superbig",  O_RDONLY);
+	fd = open("./tools/maps/invalid/no_start",  O_RDONLY);
 
 	size = 1024;
 	finished_reading = 0;
@@ -76,7 +76,6 @@ char	*read_file(void)
 	return (read_buff);
 }
 */
-
 
 char	*read_file(void)
 {
@@ -100,6 +99,5 @@ char	*read_file(void)
 				read(STDIN_FILENO, &read_buff[ft_strlen(read_buff)], size / 2))
 			finished_reading = 1;
 	}
-	printf("[[%p]]\n", read_buff);
 	return (read_buff);
 }

@@ -57,11 +57,12 @@ int		parsing(t_meta *d)
 
 	if (!get_rooms(d))
 		return (ERROR);
-
+	if (d->start < 0 || d->end < 0)
+		return (ERROR);
 	if (!get_links(d))
 		return (ERROR);	
 
-	
+		
 	d->max_path = d->l[d->start].size;
 	if (d->room_total >= 20000)
 		return (ERROR);

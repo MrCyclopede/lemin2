@@ -29,12 +29,8 @@ int		free_meta(t_meta *d)
 	int i;
 
 	i = 0;
-	
-
-		
 	free(d->og_parsing);
 	free(d->room_name);
-		
 	while(i < d->room_total && d->l)
 	{
 		free(d->l[i].rooms);
@@ -47,8 +43,8 @@ int		free_meta(t_meta *d)
 	free(d->edge_copy);
 	free(d->l);
 	free(d->queue.q);
-	
-	free_pathlist_rooms(d->max_path, &d->best);
+	if (d->best.path_list)	
+		free_pathlist_rooms(d->max_path, &d->best);
 	free(d->best.path_list);
 	return (0);
 }

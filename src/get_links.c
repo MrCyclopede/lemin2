@@ -23,6 +23,32 @@ static int skip_comment(t_meta *d, int i)
 	return (j);
 }
 
+int			goto_next_c(t_meta *d, int *i, char c)
+{
+	while (d->parsing[*i] && d->parsing[*i] != c)
+		(*i)++;
+	if (!d->parsing[*i])
+		return (0);
+	return (1);
+}
+
+static int		enlarge_links(t_meta *d, char *first, char *second)
+{
+	int index_a;
+	int index_b;
+	index_a = get_index(d, first);
+	index_b = get_index(d, second);
+	
+	if (index_a >= 0 && index_b >= 0)
+	{
+	d->l[index_a].size ++;
+	d->l[index_b].size ++;
+	}
+	else
+		return (ERROR);
+	return (SUCCESS);
+}
+
 static int		count_links(t_meta *d)
 {
 	int i;
@@ -36,20 +62,18 @@ static int		count_links(t_meta *d)
 	{
 		if (d->parsing[i] == '#')
 			i = skip_comment(d, i);
-		if (!d->parsing[i])
-			break;
 		first = &d->parsing[i];
-		while (d->parsing[i] != '-')
-			i++;
+		if (!goto_next_c(d, &i, '-'))
+			break;	
 		d->parsing[i] = '\0';
-		d->l[get_index(d, first)].size ++;
 		i++;
 		second = &d->parsing[i];
-		while (d->parsing[i] != '\n')
-			i++;
+		if (!goto_next_c(d, &i, '\n'))
+			break;
 		d->parsing[i] = '\0';
-		d->l[get_index(d, second)].size ++;
 		i++; //for \n
+		if (!enlarge_links(d, first, second))
+			break;
 		links++;
 	}
 	return (links);

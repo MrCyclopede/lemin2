@@ -53,11 +53,11 @@ static void	division(t_meta *d, t_ant *ant_list)
 	ant = 0;
 	round = 0;
 	while (ant < d->ant_total)
-	{
+	{	
 		while (d->best.size > 0 && round > d->best.path_list[d->best.size - 1].stop)
 			d->best.size--;
 		i = 0;
-		while (i < d->best.size || !i)
+		while ((i < d->best.size || !i) && ant < d->ant_total)
 		{
 			ant_list[ant].path = &d->best.path_list[i];
 			ant_list[ant].send_round = round;
@@ -85,8 +85,7 @@ static void	assign_path(t_meta *d, t_ant *a)
 void	print_result(t_meta *d)
 {
 	t_ant *a;
-
-	if (!(a = (t_ant *)ft_memalloc(sizeof(t_ant) * d->ant_total)))
+	if (!(a = (t_ant *)ft_memalloc(sizeof(t_ant) * (d->ant_total + 1))))
 		return ;
 	
 	assign_path(d, a);
