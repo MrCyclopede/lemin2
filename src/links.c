@@ -55,7 +55,6 @@ int		path_update(t_meta *d, t_path p)
 	while (i < p.size - 1)
 	{
 		d->depth[p.rooms[i]] = d->tmp_depth[p.rooms[i]];
-		printf("new depth %i %i\n", p.rooms[i], d->depth[p.rooms[i]]);
 		
 		add_to_link(d, p.rooms[i], p.rooms[i + 1], -1);
 		add_to_link(d, p.rooms[i + 1], p.rooms[i], 1);

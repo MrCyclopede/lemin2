@@ -71,7 +71,6 @@ t_path first_pass_bfs(t_meta *d)
 	int node;
 	t_path p;
 
-	printf("first-pass %d\n", 1);
 	init_bfs(d, &p);
 	p.size = bfs(d);
 	if (p.size)
@@ -91,6 +90,5 @@ t_path first_pass_bfs(t_meta *d)
 		}
 		p.rooms[i] = d->start;
 	}
-	print_path(d, p);
 	return (p); 
 }
