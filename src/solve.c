@@ -83,14 +83,22 @@ int	init_solution(t_meta *d)
 
 int	solve(t_meta *d)
 {
+	int threshold;
+
+	threshold = 0;
 	if (!init_solution(d))
 		return (ERROR);
-			
+		
 	depth_bfs(d);	
 	while (path_update(d, first_pass_bfs(d)))
-	{
+	{	
+	
 		if (!eval_group(d, find_group(d)))
-			break;
+		{
+			threshold++;
+			if (threshold > 100)	
+				break;
+		}
 		
 	}
 	if (!d->best.size)
