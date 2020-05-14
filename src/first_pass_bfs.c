@@ -24,7 +24,7 @@ static int	next_node(t_meta *d, int node)
 	{
 		if (!d->visited[d->l[node].rooms[i]]
 				&& ((get_link(d, d->edge_matrix, node, d->l[node].rooms[i]) <= 0)
-				||  (d->tmp_depth[node] + 1) < d->depth[d->l[node].rooms[i]]))
+				))//||  (d->tmp_depth[node] + 1) < d->depth[d->l[node].rooms[i]]))
 		{
 			if (d->prev[node] == -1 || !(d->depth[d->prev[node]] == INT_MAX && d->depth[d->l[node].rooms[i]] == INT_MAX && d->depth[node] != INT_MAX))
 				return (d->l[node].rooms[i]);

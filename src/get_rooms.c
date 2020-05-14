@@ -64,7 +64,7 @@ static int	get_name(t_meta *d, int n)
 		d->parsing[i] = '\0';
 		i++;
 	}
-	if (space != 2 || number != 2)
+	if (space < 2 || number != 2)
 		return (ERROR);
 	while (d->parsing[0] != '\n')
 		d->parsing++;
