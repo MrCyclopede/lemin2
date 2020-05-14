@@ -96,8 +96,8 @@ int	solve(t_meta *d)
 		if (!eval_group(d, find_group(d)))
 		{
 			threshold++;
-			//if (threshold > 100)	
-			//	break;
+			if (threshold > 50)	
+				break;
 		}
 		
 	}
