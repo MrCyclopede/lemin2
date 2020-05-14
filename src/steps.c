@@ -54,6 +54,5 @@ int	steps(t_meta *d, t_group g)
 	extra = d->ant_total - ((max_len * g.size) - len);
 	if (extra < 0)
 		return (-1); // CA VEUT DIRE CE CHEMIN C DLA MERDE
-
 	return (max_len - 1 + extra / g.size + (extra % g.size != 0));
 }

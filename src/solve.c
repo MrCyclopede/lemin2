@@ -34,9 +34,10 @@ int		eval_group(t_meta *d, t_group g)
 		d->best.steps = s;
 	}
 	else
-	{
+	{	
 		free_pathlist_rooms(d->max_path, &g);
 		free(g.path_list);
+		return (ERROR);
 	}
 	return (SUCCESS);
 }
@@ -84,12 +85,13 @@ int	solve(t_meta *d)
 {
 	if (!init_solution(d))
 		return (ERROR);
-	
+			
 	depth_bfs(d);	
 	while (path_update(d, first_pass_bfs(d)))
 	{
 		if (!eval_group(d, find_group(d)))
 			break;
+		
 	}
 	if (!d->best.size)
 		return (ERROR);

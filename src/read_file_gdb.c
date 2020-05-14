@@ -47,18 +47,24 @@ static char *realloc_and_copy(char *read_buff, int size)
 
 
 
-char	*read_file(void)
+#include <fcntl.h>
+
+char	*read_file(void) ///THIS ONE FROM A FILE
 {
 	char *read_buff;
 	int size;
 	int finished_reading;
+	int fd;
 
-	size = 4;
+	fd = open("./tools/maps/valid/big/map_big_22",  O_RDONLY);
+//	fd = open("./serpent_bug",  O_RDONLY);
+
+	size = 1024;
 	finished_reading = 0;
 	read_buff = NULL;
 	if (!(read_buff = realloc_and_copy(read_buff, size)))
 		return (NULL);
-	if (size > read(STDIN_FILENO, read_buff, size))
+	if (size > read(fd, read_buff, size))
 		finished_reading = 1;
 	while (!finished_reading)
 	{
@@ -66,8 +72,10 @@ char	*read_file(void)
 		if (!(read_buff = realloc_and_copy(read_buff, size)))
 			return (NULL);
 		if (size / 2 >
-				read(STDIN_FILENO, &read_buff[ft_strlen(read_buff)], size / 2))
+				read(fd, &read_buff[ft_strlen(read_buff)], size / 2))
 			finished_reading = 1;
 	}
+	close(fd);
 	return (read_buff);
 }
+

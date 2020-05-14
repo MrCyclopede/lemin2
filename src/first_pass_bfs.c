@@ -12,19 +12,22 @@
 
 #include "lemin.h"
 
+void lstp(void){}
 
 static int	next_node(t_meta *d, int node)
 {
 	int i;
 			
 	i = 0;
+
 	while (i < d->l[node].size)
 	{
 		if (!d->visited[d->l[node].rooms[i]]
 				&& ((get_link(d, d->edge_matrix, node, d->l[node].rooms[i]) <= 0)
 				||  (d->tmp_depth[node] + 1) < d->depth[d->l[node].rooms[i]]))
 		{
-			return (d->l[node].rooms[i]);
+			if (d->prev[node] == -1 || !(d->depth[d->prev[node]] == INT_MAX && d->depth[d->l[node].rooms[i]] == INT_MAX && d->depth[node] != INT_MAX))
+				return (d->l[node].rooms[i]);
 		}
 		i++;
 	}
@@ -34,11 +37,11 @@ static int bfs(t_meta *d)
 {
 	int current_node;
 	int	node;
-
+	
 	d->visited[d->start] = 1;
 	add_queue(d, d->start);
 	while ((current_node = queue_next(d)) >= 0)
-	{	
+	{
 		while ((node = next_node(d, current_node)) >= 0)
 		{
 			d->prev[node] = current_node;
@@ -51,7 +54,7 @@ static int bfs(t_meta *d)
 			add_queue(d, node);
 			d->visited[node] = 1;
 		}
-	}
+}	
 	return (0); //should never happen 
 }
 
@@ -61,6 +64,7 @@ static int	init_bfs(t_meta *d, t_path *p)
 	reset_queue(d);
 	ft_memcpy(d->tmp_depth, d->depth, sizeof(int) * d->room_total);
 	ft_bzero(d->prev, sizeof(int) * d->room_total);
+	d->prev[d->start] = -1;
 	ft_bzero(d->visited, sizeof(int) * d->room_total);
 	return (SUCCESS);
 }
