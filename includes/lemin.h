@@ -66,6 +66,7 @@ typedef struct	s_meta
 	
 	char *parsing;
 	char *og_parsing;	
+	char *parsing_cpy;	
 	char **room_name;
 
 	int start; 		// set to -1 

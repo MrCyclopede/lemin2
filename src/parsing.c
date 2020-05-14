@@ -45,13 +45,18 @@ int	get_ants(t_meta *d)
 
 int		parsing(t_meta *d)
 {
+	int len;
+
+	len = 0;
 	if (!(d->parsing = read_file()))
 		return (ERROR);
 	else
 		d->og_parsing = d->parsing;
 	//STILL NEED TO CHECK for INFINITE or BuLLShit file /////
-	ft_putendl(d->parsing);
-
+	len = ft_strlen(d->parsing);
+	if (!(d->parsing_cpy = (char *)ft_memalloc(sizeof(char) * (len + 1))))
+		return (0);
+	ft_memcpy(d->parsing_cpy, d->parsing, sizeof(char) * len);
 	if (!get_ants(d))
 		return (ERROR);	
 
@@ -66,7 +71,5 @@ int		parsing(t_meta *d)
 	d->max_path = d->l[d->start].size;
 	if (d->room_total >= QUEUE_SIZE)
 		return (ERROR);
-	//	STILL NEED TO SECURE ALL THE WEIRD SHIT LIKE COMMENT AT THE END OF FILE
-	//REMEMBER TO TEST FOR nO neWLINE AT ThE END OF ThE FILE 
 	return (SUCCESS);
 }

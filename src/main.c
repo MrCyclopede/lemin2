@@ -138,6 +138,7 @@ int		main(void)
 		return (ERROR);
 	}
 	
+	ft_putendl(d.parsing_cpy);	
 	print_result(&d);
 	free_meta(&d);
 	return (0);

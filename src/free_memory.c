@@ -30,6 +30,7 @@ int		free_meta(t_meta *d)
 
 	i = 0;
 	free(d->og_parsing);
+	free(d->parsing_cpy);
 	free(d->room_name);
 	while(i < d->room_total && d->l)
 	{
