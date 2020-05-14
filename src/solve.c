@@ -43,6 +43,8 @@ int		eval_group(t_meta *d, t_group g)
 
 int	init_solution(t_meta *d)
 {
+	int i;
+
 	ft_bzero(&d->best, sizeof(t_group)); // superflu ? 
 //	if (!(d->best.path_list
 //				= (t_path *)ft_memalloc(sizeof(t_path) * d->max_path)))
@@ -58,10 +60,23 @@ int	init_solution(t_meta *d)
 		return (ERROR);
 	if (!(d->depth = (int *)ft_memalloc(sizeof(int) * d->room_total)))
 		return (ERROR);
+	if (!(d->tmp_depth = (int *)ft_memalloc(sizeof(int) * d->room_total)))
+		return (ERROR);
+
+	if (!(d->true_depth = (int *)ft_memalloc(sizeof(int) * d->room_total)))
+		return (ERROR);
+
 	if (!(d->visited = (int *)ft_memalloc(sizeof(int) * d->room_total)))
 		return (ERROR);
 	if (!(d->prev = (int *)ft_memalloc(sizeof(int) * d->room_total)))
 		return (ERROR);
+	i = 0;
+	while(i < d->room_total)
+	{
+		d->depth[i] = INT_MAX;
+		i++;
+	}
+	d->depth[d->start] = 0;
 	return (SUCCESS);
 }
 
@@ -70,6 +85,7 @@ int	solve(t_meta *d)
 	if (!init_solution(d))
 		return (ERROR);
 	
+	depth_bfs(d);	
 	while (path_update(d, first_pass_bfs(d)))
 	{
 		if (!eval_group(d, find_group(d)))

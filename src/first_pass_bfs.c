@@ -21,7 +21,8 @@ static int	next_node(t_meta *d, int node)
 	while (i < d->l[node].size)
 	{
 		if (!d->visited[d->l[node].rooms[i]]
-				&& (get_link(d, d->edge_matrix, node, d->l[node].rooms[i]) <= 0))
+				&& ((get_link(d, d->edge_matrix, node, d->l[node].rooms[i]) <= 0)
+				||  (d->tmp_depth[node] + 1) < d->depth[d->l[node].rooms[i]]))
 		{
 			return (d->l[node].rooms[i]);
 		}
@@ -35,17 +36,16 @@ static int bfs(t_meta *d)
 	int	node;
 
 	d->visited[d->start] = 1;
-	d->depth[d->start] = 0;
 	add_queue(d, d->start);
 	while ((current_node = queue_next(d)) >= 0)
 	{	
 		while ((node = next_node(d, current_node)) >= 0)
 		{
 			d->prev[node] = current_node;
-			if (get_link(d, d->edge_matrix, node, current_node) == 0)
-				d->depth[node] = d->depth[current_node] + 1;
-			else
-				d->depth[node] = d->depth[current_node] - 1;
+			if (get_link(d, d->edge_matrix, current_node, node) < 0)
+				d->tmp_depth[node] = d->tmp_depth[current_node] - 1;
+			else	
+				d->tmp_depth[node] = d->tmp_depth[current_node] + 1;
 			if (node == d->end)
 				return (path_len(d));
 			add_queue(d, node);
@@ -57,16 +57,9 @@ static int bfs(t_meta *d)
 
 static int	init_bfs(t_meta *d, t_path *p)
 {
-	int i;
-	
 	ft_bzero(p, sizeof(t_path));
-	i = 0;
-	while(i < d->room_total)
-	{
-		d->depth[i] = INT_MAX;
-		i++;
-	}
 	reset_queue(d);
+	ft_memcpy(d->tmp_depth, d->depth, sizeof(int) * d->room_total);
 	ft_bzero(d->prev, sizeof(int) * d->room_total);
 	ft_bzero(d->visited, sizeof(int) * d->room_total);
 	return (SUCCESS);
@@ -78,6 +71,7 @@ t_path first_pass_bfs(t_meta *d)
 	int node;
 	t_path p;
 
+	printf("first-pass %d\n", 1);
 	init_bfs(d, &p);
 	p.size = bfs(d);
 	if (p.size)
@@ -97,5 +91,6 @@ t_path first_pass_bfs(t_meta *d)
 		}
 		p.rooms[i] = d->start;
 	}
+	print_path(d, p);
 	return (p); 
 }

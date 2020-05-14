@@ -15,7 +15,7 @@
 
 void		reset_queue(t_meta *d)
 {
-	ft_bzero(d->queue.q, sizeof(int) * 20000);
+	ft_bzero(d->queue.q, sizeof(int) * QUEUE_SIZE);
 	d->queue.index = 0;
 	d->queue.current = 0;
 }
@@ -23,11 +23,11 @@ void		reset_queue(t_meta *d)
 int			create_queue(t_meta *d)
 {
 	ft_bzero(&d->queue, sizeof(t_queue));
-	if	(!(d->queue.q = (int *)ft_memalloc(sizeof(int) * 20000)))
+	if	(!(d->queue.q = (int *)ft_memalloc(sizeof(int) * QUEUE_SIZE)))
 		return (ERROR);
 	return (SUCCESS);
 }
-//PENSER A FREE CE TRUC HE OUAIS
+
 int			queue_next(t_meta *d)
 {
 	int ret;
@@ -39,13 +39,13 @@ int			queue_next(t_meta *d)
 		d->queue.current++;
 		return (ret);
 	}
-	ft_bzero(d->queue.q, sizeof(int) * 20000);
+	ft_bzero(d->queue.q, sizeof(int) * QUEUE_SIZE);
 	return (-1); // this means we finished the Q is now empty
 }
 
 void	add_queue(t_meta *d, int value)
 {
-	if (d->queue.index < 20000)
+	if (d->queue.index < QUEUE_SIZE)
 		d->queue.q[d->queue.index] = value;
 	else
 		return ;

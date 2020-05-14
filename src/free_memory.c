@@ -37,6 +37,8 @@ int		free_meta(t_meta *d)
 		i++;
 	}
 	free(d->depth);
+	free(d->true_depth);
+	free(d->tmp_depth);
 	free(d->visited);
 	free(d->prev);
 	free(d->edge_matrix);

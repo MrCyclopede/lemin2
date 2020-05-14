@@ -22,7 +22,7 @@
 # define SUCCESS 1
 # define ERROR 0
 # define INT_MAX __INT_MAX__
-
+# define QUEUE_SIZE 20000
 
 
 
@@ -77,10 +77,12 @@ typedef struct	s_meta
 	t_links *l;
 
 	t_group	best;
-
+	
 	int		*edge_matrix;
 	int		*edge_copy;
-	int		*depth; /// TO USE ahahaHAAhahaAHahaaAhaaHAAHAHAHAAHAHAAH
+	int		*depth;
+	int		*tmp_depth; 
+	int 		*true_depth;
 	int		*visited;
 	int		*prev;
 	t_queue queue;
@@ -98,6 +100,8 @@ int			get_rooms(t_meta *d);
 int			get_links(t_meta *d);
 char		*read_file(void);
 //#### SOLVING #######
+void	depth_bfs(t_meta *d);
+
 int	steps(t_meta *d, t_group g);
 t_path		pathfinder_bfs(t_meta *d);
 t_path		first_pass_bfs(t_meta *d);

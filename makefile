@@ -33,7 +33,7 @@ SRC = 	main.c parsing.c read_file.c get_rooms.c solve.c queue.c \
 		first_pass_bfs.c \
 		links.c \
 		find_group.c steps.c print_result.c \
-		get_links.c free_memory.c
+		get_links.c free_memory.c depth_bfs.c
 
 all: $(NAME)
 

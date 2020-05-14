@@ -45,16 +45,16 @@ static char *realloc_and_copy(char *read_buff, int size)
 	return(new);
 }
 
-/*
+
 #include <fcntl.h>
-char	*read_file(void)
+char	*read_file(void) ///THIS ONE FROM A FILE
 {
 	char *read_buff;
 	int size;
 	int finished_reading;
 	int fd;
 
-	fd = open("./tools/maps/invalid/no_start",  O_RDONLY);
+	fd = open("./sujetmap",  O_RDONLY);
 
 	size = 1024;
 	finished_reading = 0;
@@ -75,8 +75,8 @@ char	*read_file(void)
 	close(fd);
 	return (read_buff);
 }
-*/
 
+/*
 char	*read_file(void)
 {
 	char *read_buff;
@@ -100,4 +100,4 @@ char	*read_file(void)
 			finished_reading = 1;
 	}
 	return (read_buff);
-}
+}*/

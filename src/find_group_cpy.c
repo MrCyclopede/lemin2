@@ -15,25 +15,14 @@
 static int		next_node(t_meta *d, int current)
 {
 	int i;
-	int min_depth; 
-	int min_node;
 
-	min_depth = INT_MAX;
-	min_node = -1;	
 	i = 0;
-	while (i < d->l[current].size)
-	{	
-		if (get_link(d, d->edge_copy, current, d->l[current].rooms[i]) == -1 && !d->visited[d->l[current].rooms[i]] && d->true_depth[d->l[current].rooms[i]] < min_depth)
-		{
-			min_depth = d->true_depth[d->l[current].rooms[i]];
-			min_node = d->l[current].rooms[i];
-		}
+	while (i < d->room_total)
+	{
+		if (get_link(d, d->edge_copy, current, i) == 1 && !d->visited[i])
+			return (i);
 		i++;
 	}
-	if (min_node >= 0)
-		{
-		return (min_node);
-		}
 	return (-1);
 }
 
@@ -43,12 +32,12 @@ static int		path_size(t_meta *d)
 	int current_node;
 	int node;
 
-	current_node = d->end;
+	current_node = d->start;
 	size = 0;
 	while ((node = next_node(d, current_node)) >= 0)
 	{
 		size++;
-		if (node == d->start)
+		if (node == d->end)
 			return (size + 1);
 		current_node = node;
 	}
@@ -61,7 +50,7 @@ static t_path 		pathfinder(t_meta *d)
 	int node;
 	int current_node;
 	int i;
-	
+
 	ft_bzero(&p, sizeof(t_path));
 	if ((p.size = path_size(d)) < 0)
 		return (p);
@@ -70,19 +59,19 @@ static t_path 		pathfinder(t_meta *d)
 		p.size = 0;
 		return (p);
 	}
-	current_node = d->end;
-	i = p.size - 1;
+	current_node = d->start;
+	i = 0;
 	while ((node = next_node(d, current_node)) >= 0)
 	{	
 		p.rooms[i] = current_node;
-		if (node == d->start)
+		if (node == d->end)
 		{
-			p.rooms[0] = node;
+			p.rooms[i + 1] = node;
 			return (p);
 		}
 		current_node = node;
 		d->visited[node] = 1;
-		i--;
+		i++;
 	}
 	p.size = 0;
 	return (p);

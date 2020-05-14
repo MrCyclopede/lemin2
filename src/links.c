@@ -18,8 +18,9 @@ int	get_link(t_meta *d, int *matrix, int from, int to)
 }
 
 static void	add_to_link(t_meta *d, int from, int to, int val)
-{
-	d->edge_matrix[to * d->room_total + from] += val;
+{	
+	if (d->edge_matrix[to * d->room_total + from] != val)
+		d->edge_matrix[to * d->room_total + from] += val;
 }
 
 static void	zero_out_link(t_meta *d, int from, int to, int *matrix)
@@ -48,14 +49,19 @@ int		path_update(t_meta *d, t_path p)
 	if (p.size <= 0)
 	{	
 		free(p.rooms);
+		p.rooms = 0;
 		return (ERROR);
 	}
 	while (i < p.size - 1)
 	{
+		d->depth[p.rooms[i]] = d->tmp_depth[p.rooms[i]];
+		printf("new depth %i %i\n", p.rooms[i], d->depth[p.rooms[i]]);
+		
 		add_to_link(d, p.rooms[i], p.rooms[i + 1], -1);
 		add_to_link(d, p.rooms[i + 1], p.rooms[i], 1);
 		i++;
 	}		
+
 	free(p.rooms);
 	return (SUCCESS);
 }

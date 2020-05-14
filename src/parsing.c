@@ -64,7 +64,7 @@ int		parsing(t_meta *d)
 
 		
 	d->max_path = d->l[d->start].size;
-	if (d->room_total >= 20000)
+	if (d->room_total >= QUEUE_SIZE)
 		return (ERROR);
 	//	STILL NEED TO SECURE ALL THE WEIRD SHIT LIKE COMMENT AT THE END OF FILE
 	//REMEMBER TO TEST FOR nO neWLINE AT ThE END OF ThE FILE 
