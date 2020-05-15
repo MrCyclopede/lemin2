@@ -111,7 +111,8 @@ int	get_rooms(t_meta *d)
 	while (i < d->room_total)
 	{
 		while (d->parsing[0] == '#')
-			get_comment(d, i);
+			if (!get_comment(d, i))
+				return(ERROR);
 		if (!get_name(d, i))
 			return (ERROR);
 		i++;
