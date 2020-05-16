@@ -60,7 +60,7 @@ static int		count_links(t_meta *d)
 	i = 0;
 	while (d->parsing[i])
 	{
-		if (d->parsing[i] == '#')
+		while (d->parsing[i] == '#')
 			i = skip_comment(d, i);
 		first = &d->parsing[i];
 		if (!goto_next_c(d, &i, '-'))

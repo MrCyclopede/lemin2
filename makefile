@@ -29,25 +29,24 @@ HEADER		=	./includes/lemin.h
 
 SRC_DIR = src
 
-SRC = 	main.c parsing.c read_file.c get_rooms.c solve.c queue.c \
+SRC = 	main.c parsing.c get_rooms.c solve.c queue.c \
 		first_pass_bfs.c \
 		links.c \
 		find_group.c steps.c print_result.c \
-		get_links.c free_memory.c depth_bfs.c
+		get_links.c free_memory.c depth_bfs.c\
+		read_file.c 
 
 all: $(NAME)
 
 $(NAME): obj $(OBJS) $(LIB) $(HEADER)
+	echo $(DBG)
 	$(CC) $(OBJS) $(CFLAGS) $(INC_FLAG) $(LIB_LINK)  -o $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER) makefile 
 	$(CC) $(CFLAGS) -I $(LIB_PATH) -I $(INC_DIR) -c $< -o $@
 
 $(LIB):
 	make -C $(LIB_PATH)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c 
-	$(CC) $(CFLAGS) -I $(LIB_PATH) -I $(INC_DIR) -c $< -o $@
 
 obj:
 	mkdir -p obj
