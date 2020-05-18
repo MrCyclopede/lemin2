@@ -6,7 +6,7 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 05:36:39 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/02/21 19:34:51 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/05/18 08:47:39 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ static int	max_path_len(t_group g)
 	while (i < g.size)
 	{
 		if (g.path_list[i].size > max_len)
-			max_len = g.path_list[i].size - 1; 
+			max_len = g.path_list[i].size - 1;
 		i++;
 	}
 	return (max_len);
 }
 
-int	steps(t_meta *d, t_group g)
+int			steps(t_meta *d, t_group g)
 {
 	int max_len;
 	int len;
@@ -53,6 +53,6 @@ int	steps(t_meta *d, t_group g)
 	len = total_len(g);
 	extra = d->ant_total - ((max_len * g.size) - len);
 	if (extra < 0)
-		return (-1); // CA VEUT DIRE CE CHEMIN C DLA MERDE
+		return (-1);
 	return (max_len - 1 + extra / g.size + (extra % g.size != 0));
 }

@@ -6,13 +6,13 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 04:38:23 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/03/12 02:58:25 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/05/18 08:20:47 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static int skip_comment(t_meta *d, int i)
+static int		skip_comment(t_meta *d, int i)
 {
 	int j;
 
@@ -23,7 +23,7 @@ static int skip_comment(t_meta *d, int i)
 	return (j);
 }
 
-int			goto_next_c(t_meta *d, int *i, char c)
+int				goto_next_c(t_meta *d, int *i, char c)
 {
 	while (d->parsing[*i] && d->parsing[*i] != c)
 		(*i)++;
@@ -36,13 +36,13 @@ static int		enlarge_links(t_meta *d, char *first, char *second)
 {
 	int index_a;
 	int index_b;
+
 	index_a = get_index(d, first);
 	index_b = get_index(d, second);
-	
 	if (index_a >= 0 && index_b >= 0)
 	{
-	d->l[index_a].size ++;
-	d->l[index_b].size ++;
+		d->l[index_a].size++;
+		d->l[index_b].size++;
 	}
 	else
 		return (ERROR);
@@ -51,10 +51,10 @@ static int		enlarge_links(t_meta *d, char *first, char *second)
 
 static int		count_links(t_meta *d)
 {
-	int i;
-	char *first;
-	char *second;
-	int links;
+	int		i;
+	char	*first;
+	char	*second;
+	int		links;
 
 	links = 0;
 	i = 0;
@@ -64,40 +64,38 @@ static int		count_links(t_meta *d)
 			i = skip_comment(d, i);
 		first = &d->parsing[i];
 		if (!goto_next_c(d, &i, '-'))
-			break;	
+			break ;
 		d->parsing[i] = '\0';
 		i++;
 		second = &d->parsing[i];
 		if (!goto_next_c(d, &i, '\n'))
-			break;
+			break ;
 		d->parsing[i] = '\0';
-		i++; //for \n
+		i++;
 		if (!enlarge_links(d, first, second))
-			break;
+			break ;
 		links++;
 	}
 	return (links);
 }
 
-
-static void	write_link(t_meta *d, int first, int second)
+static void		write_link(t_meta *d, int first, int second)
 {
 	d->l[first].rooms[d->l[first].index] = second;
 	d->l[first].index++;
-
 	d->l[second].rooms[d->l[second].index] = first;
 	d->l[second].index++;
 }
 
-static int	read_links(t_meta *d, int links)
+static int		read_links(t_meta *d, int links)
 {
-	int i;
-	char *first;
-	char *second;
+	int		i;
+	char	*first;
+	char	*second;
 
 	i = 0;
 	while (i < links)
-	{	
+	{
 		while (d->parsing[0] == '#')
 			d->parsing += skip_comment(d, 0);
 		first = d->parsing;
@@ -109,12 +107,12 @@ static int	read_links(t_meta *d, int links)
 		while (d->parsing[0])
 			d->parsing++;
 		d->parsing++;
-		i ++;
+		i++;
 	}
 	return (SUCCESS);
 }
 
-int		get_links(t_meta *d)
+int				get_links(t_meta *d)
 {
 	int i;
 	int links;

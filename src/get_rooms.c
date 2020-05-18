@@ -6,7 +6,7 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 04:48:16 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/02/24 04:57:37 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/05/18 08:41:51 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	count_rooms(char *str)
 	while (str[i] && str[i] != '-')
 	{
 		if (str[i] == '\n')
-			rooms ++;
+			rooms++;
 		if (str[i] == '#')
 		{
 			while (str[i] != '\n')
@@ -45,19 +45,19 @@ static int	get_name(t_meta *d, int n)
 	d->room_name[n] = d->parsing;
 	if (d->parsing[i] == '\n' || d->parsing[i] == 'L')
 		return (ERROR);
-	while (d->parsing[i] != ' ') // skip the name
+	while (d->parsing[i] != ' ')
 		i++;
 	if (!i)
 		return (ERROR);
-	while (d->parsing[i] != '\n') // fill the rest with 0, advance to next line
+	while (d->parsing[i] != '\n')
 	{
 		if (d->parsing[i] == ' ')
-			space ++;
+			space++;
 		if (ft_isdigit(d->parsing[i]))
 		{
 			while (ft_isdigit(d->parsing[i + 1]))
 				i++;
-			number ++;
+			number++;
 		}
 		if (((d->parsing[i] != ' ' && !ft_isdigit(d->parsing[i]))))
 			return (ERROR);
@@ -69,7 +69,6 @@ static int	get_name(t_meta *d, int n)
 	while (d->parsing[0] != '\n')
 		d->parsing++;
 	d->parsing++;
-
 	return (SUCCESS);
 }
 
@@ -90,7 +89,7 @@ static int	get_comment(t_meta *d, int n)
 				d->end = n;
 			else
 				return (ERROR);
-		}	
+		}
 	}
 	while (d->parsing[0] != '\n')
 		d->parsing++;
@@ -98,7 +97,7 @@ static int	get_comment(t_meta *d, int n)
 	return (SUCCESS);
 }
 
-int	get_rooms(t_meta *d)
+int			get_rooms(t_meta *d)
 {
 	int i;
 
@@ -106,16 +105,16 @@ int	get_rooms(t_meta *d)
 	d->start = -1;
 	d->end = -1;
 	d->room_total = count_rooms(d->parsing);
-	if (!(d->room_name = (char **)ft_memalloc(d->room_total * sizeof (char *))))
+	if (!(d->room_name = (char **)ft_memalloc(d->room_total * sizeof(char *))))
 		return (ERROR);
 	while (i < d->room_total)
 	{
 		while (d->parsing[0] == '#')
 			if (!get_comment(d, i))
-				return(ERROR);
+				return (ERROR);
 		if (!get_name(d, i))
 			return (ERROR);
 		i++;
 	}
-	return (SUCCESS);	
+	return (SUCCESS);
 }

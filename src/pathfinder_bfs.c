@@ -6,13 +6,13 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:12:46 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/03/12 01:43:14 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/05/18 08:27:30 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static 	void reverse_path(t_path *p)
+static void	reverse_path(t_path *p)
 {
 	int swap;
 	int i;
@@ -29,6 +29,7 @@ static 	void reverse_path(t_path *p)
 		j--;
 	}
 }
+
 static int	next_node(t_meta *d, int node)
 {
 	int i;
@@ -43,15 +44,15 @@ static int	next_node(t_meta *d, int node)
 	return (-1);
 }
 
-static int bfs(t_meta *d)
+static int	bfs(t_meta *d)
 {
 	int current_node;
 	int	node;
-	
+
 	d->visited[d->start] = 1;
 	add_queue(d, d->start);
 	while ((current_node = queue_next(d)) >= 0)
-	{	
+	{
 		while ((node = next_node(d, current_node)) >= 0)
 		{
 			d->prev[node] = current_node;
@@ -65,7 +66,6 @@ static int bfs(t_meta *d)
 	return (0);
 }
 
-
 static void	init_bfs(t_meta *d, t_path *p)
 {
 	reset_queue(d);
@@ -75,11 +75,11 @@ static void	init_bfs(t_meta *d, t_path *p)
 	ft_bzero(d->visited, sizeof(int) * d->room_total);
 }
 
-t_path pathfinder_bfs(t_meta *d)
+t_path		pathfinder_bfs(t_meta *d)
 {
-	t_path p;
-	int i;
-	int node;
+	t_path	p;
+	int		i;
+	int		node;
 
 	i = 0;
 	init_bfs(d, &p);
@@ -102,5 +102,5 @@ t_path pathfinder_bfs(t_meta *d)
 		p.rooms[i] = d->start;
 	}
 	reverse_path(&p);
-	return (p); 
+	return (p);
 }

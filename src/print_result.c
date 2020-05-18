@@ -6,17 +6,16 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 05:16:18 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/02/22 03:26:05 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/05/18 08:46:24 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-
 static void	move_ant(t_meta *d, t_ant *a, int ant)
 {
 	a->room_index++;
-	if (a->room_index  >= a->path->size)
+	if (a->room_index >= a->path->size)
 		return ;
 	ft_putchar('L');
 	ft_putnbr(ant);
@@ -41,9 +40,10 @@ static void	sender(t_meta *d, t_ant *a)
 			ant++;
 		}
 		ft_putchar('\n');
-		round++;	
+		round++;
 	}
 }
+
 static void	division(t_meta *d, t_ant *ant_list)
 {
 	int i;
@@ -53,8 +53,9 @@ static void	division(t_meta *d, t_ant *ant_list)
 	ant = 0;
 	round = 0;
 	while (ant < d->ant_total)
-	{	
-		while (d->best.size > 0 && round > d->best.path_list[d->best.size - 1].stop)
+	{
+		while (d->best.size > 0
+				&& round > d->best.path_list[d->best.size - 1].stop)
 			d->best.size--;
 		i = 0;
 		while ((i < d->best.size || !i) && ant < d->ant_total)
@@ -63,33 +64,32 @@ static void	division(t_meta *d, t_ant *ant_list)
 			ant_list[ant].send_round = round;
 			i++;
 			ant++;
-		}			
+		}
 		round++;
 	}
 }
 
-
 static void	assign_path(t_meta *d, t_ant *a)
 {
 	int i;
-	
+
 	i = 0;
 	while (i < d->best.size)
 	{
-		d->best.path_list[i].stop = d->best.steps - (d->best.path_list[i].size - 1);
+		d->best.path_list[i].stop =
+			d->best.steps - (d->best.path_list[i].size - 1);
 		i++;
 	}
 	division(d, a);
 }
 
-void	print_result(t_meta *d)
+void		print_result(t_meta *d)
 {
 	t_ant *a;
+
 	if (!(a = (t_ant *)ft_memalloc(sizeof(t_ant) * (d->ant_total + 1))))
 		return ;
-	
 	assign_path(d, a);
-
 	sender(d, a);
 	free(a);
 	return ;

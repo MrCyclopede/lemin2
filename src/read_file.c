@@ -6,13 +6,13 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:38:27 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/03/09 03:58:37 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/05/18 08:29:05 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static void	concat(char *dst, char *src)
+static void		concat(char *dst, char *src)
 {
 	int i;
 	int j;
@@ -29,7 +29,7 @@ static void	concat(char *dst, char *src)
 	}
 }
 
-static char *realloc_and_copy(char *read_buff, int size)
+static char		*realloc_and_copy(char *read_buff, int size)
 {
 	char *new;
 
@@ -42,16 +42,14 @@ static char *realloc_and_copy(char *read_buff, int size)
 	if (read_buff)
 		concat(new, read_buff);
 	free(read_buff);
-	return(new);
+	return (new);
 }
 
-
-
-char	*read_file(void)
+char			*read_file(void)
 {
-	char *read_buff;
-	int size;
-	int finished_reading;
+	char	*read_buff;
+	int		size;
+	int		finished_reading;
 
 	size = 4;
 	finished_reading = 0;

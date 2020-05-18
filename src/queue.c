@@ -6,12 +6,11 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 12:12:49 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/02/10 00:56:49 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/05/18 07:40:47 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
-
 
 void		reset_queue(t_meta *d)
 {
@@ -23,7 +22,7 @@ void		reset_queue(t_meta *d)
 int			create_queue(t_meta *d)
 {
 	ft_bzero(&d->queue, sizeof(t_queue));
-	if	(!(d->queue.q = (int *)ft_memalloc(sizeof(int) * QUEUE_SIZE)))
+	if (!(d->queue.q = (int *)ft_memalloc(sizeof(int) * QUEUE_SIZE)))
 		return (ERROR);
 	return (SUCCESS);
 }
@@ -40,10 +39,10 @@ int			queue_next(t_meta *d)
 		return (ret);
 	}
 	ft_bzero(d->queue.q, sizeof(int) * QUEUE_SIZE);
-	return (-1); // this means we finished the Q is now empty
+	return (-1);
 }
 
-void	add_queue(t_meta *d, int value)
+void		add_queue(t_meta *d, int value)
 {
 	if (d->queue.index < QUEUE_SIZE)
 		d->queue.q[d->queue.index] = value;
