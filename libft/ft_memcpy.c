@@ -6,7 +6,7 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/22 04:57:53 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/02/23 08:44:21 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/05/18 18:22:23 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 	i = 0;
 	while (i < n % 16)
 	{
-		((unsigned char *)dst)[i] = ((unsigned char *)src)[i]; 
+		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
 		i++;
 	}
 	ptr_dst = (__uint128_t *)(dst + i);
