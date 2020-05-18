@@ -6,7 +6,7 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 00:12:46 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/05/18 08:27:30 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/05/18 17:02:06 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ t_path		pathfinder_bfs(t_meta *d)
 	int		i;
 	int		node;
 
-	i = 0;
 	init_bfs(d, &p);
 	p.size = bfs(d);
 	if (p.size)

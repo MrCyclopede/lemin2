@@ -6,11 +6,18 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 07:23:13 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/05/18 08:04:37 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/05/18 17:13:02 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
+
+int		free_for_norm(t_meta *d, t_group g)
+{
+	free_pathlist_rooms(d->max_path, &g);
+	free(g.path_list);
+	return (ERROR);
+}
 
 int		eval_group(t_meta *d, t_group g)
 {
@@ -18,11 +25,7 @@ int		eval_group(t_meta *d, t_group g)
 
 	s = steps(d, g);
 	if (s < 0)
-	{
-		free_pathlist_rooms(d->max_path, &g);
-		free(g.path_list);
-		return (ERROR);
-	}
+		return (free_for_norm(d, g));
 	else if (s < d->best.steps && s > 0)
 	{
 		if (d->best.path_list)
@@ -34,22 +37,12 @@ int		eval_group(t_meta *d, t_group g)
 		d->best.steps = s;
 	}
 	else
-	{
-		free_pathlist_rooms(d->max_path, &g);
-		free(g.path_list);
-		return (ERROR);
-	}
+		return (free_for_norm(d, g));
 	return (SUCCESS);
 }
 
-int		init_solution(t_meta *d)
+int		malloc_d(t_meta *d)
 {
-	int i;
-
-	ft_bzero(&d->best, sizeof(t_group));
-	d->best.steps = INT_MAX;
-	if (!create_queue(d))
-		return (ERROR);
 	if (!(d->edge_matrix = (int *)ft_memalloc(sizeof(int)
 					* (d->room_total * d->room_total))))
 		return (ERROR);
@@ -65,6 +58,19 @@ int		init_solution(t_meta *d)
 	if (!(d->visited = (int *)ft_memalloc(sizeof(int) * d->room_total)))
 		return (ERROR);
 	if (!(d->prev = (int *)ft_memalloc(sizeof(int) * d->room_total)))
+		return (ERROR);
+	return (SUCCESS);
+}
+
+int		init_solution(t_meta *d)
+{
+	int i;
+
+	ft_bzero(&d->best, sizeof(t_group));
+	d->best.steps = INT_MAX;
+	if (!create_queue(d))
+		return (ERROR);
+	if (malloc_d(d) == ERROR)
 		return (ERROR);
 	i = 0;
 	while (i < d->room_total)

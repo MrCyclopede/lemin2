@@ -6,7 +6,7 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 03:05:42 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/05/18 08:13:19 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/05/18 17:21:25 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,22 @@ static int		path_size(t_meta *d)
 	return (-1);
 }
 
+static int		init_pathfinder(t_meta *d, t_path *p)
+{
+	ft_bzero(p, sizeof(t_path));
+	if ((p->size = path_size(d)) < 0)
+	{
+		p->size = 0;
+		return (ERROR);
+	}
+	if (!(p->rooms = (int *)ft_memalloc(sizeof(int) * p->size)))
+	{
+		p->size = 0;
+		return (ERROR);
+	}
+	return (SUCCESS);
+}
+
 static t_path	pathfinder(t_meta *d)
 {
 	t_path	p;
@@ -62,14 +78,8 @@ static t_path	pathfinder(t_meta *d)
 	int		current_node;
 	int		i;
 
-	ft_bzero(&p, sizeof(t_path));
-	if ((p.size = path_size(d)) < 0)
+	if (!init_pathfinder(d, &p))
 		return (p);
-	if (!(p.rooms = (int *)ft_memalloc(sizeof(int) * p.size)))
-	{
-		p.size = 0;
-		return (p);
-	}
 	current_node = d->end;
 	i = p.size - 1;
 	while ((node = next_node(d, current_node)) >= 0)
