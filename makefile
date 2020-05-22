@@ -6,7 +6,7 @@
 #    By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/22 12:01:07 by rcourtoi          #+#    #+#              #
-#    Updated: 2020/03/12 03:11:48 by rcourtoi         ###   ########.fr        #
+#    Updated: 2020/05/22 20:05:05 by rcourtoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,9 @@ SRC_DIR = src
 
 SRC = 	main.c parsing.c get_rooms.c solve.c queue.c \
 		first_pass_bfs.c \
-		links.c \
-		find_group.c steps.c print_result.c \
-		get_links.c free_memory.c depth_bfs.c\
+		paths.c links.c \
+		init_find_group.c find_group.c steps.c print_result.c \
+		get_links2.c get_links.c free_memory.c depth_bfs.c\
 		read_file.c 
 
 all: $(NAME)

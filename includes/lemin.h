@@ -6,7 +6,7 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 06:37:13 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/05/18 18:19:18 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/05/22 20:04:33 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,12 @@ typedef struct	s_meta
 	t_queue	queue;
 }				t_meta;
 
+void			add_to_link(t_meta *d, int from, int to, int val);
+int				goto_next_c(t_meta *d, int *i, char c);
+int				skip_comment(t_meta *d, int i);
+int				path_size(t_meta *d);
+int				init_pathfinder(t_meta *d, t_path *p);
+int				init_find_group(t_meta *d, t_group *g, t_path *p);
 int				get_index(t_meta *d, char *room);
 int				parsing(t_meta *d);
 int				get_rooms(t_meta *d);
