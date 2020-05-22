@@ -6,7 +6,7 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 04:48:16 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/05/18 17:16:40 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/05/22 19:45:41 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,14 @@ static int	count_rooms(char *str)
 	return (rooms);
 }
 
-static int	get_name(t_meta *d, int n)
+static int	trim_after_name(t_meta *d, int i)
 {
-	int i;
 	int space;
 	int number;
 
-	i = 0;
-	space = 0;
 	number = 0;
-	d->room_name[n] = d->parsing;
-	if (d->parsing[i] == '\n' || d->parsing[i] == 'L')
-		return (ERROR);
-	while (d->parsing[i] != ' ')
-		i++;
-	if (!i)
-		return (ERROR);
-	while (d->parsing[i] != '\n')
+	space = 0;
+	while (d->parsing[i] && d->parsing[i] != '\n')
 	{
 		if (d->parsing[i] == ' ')
 			space++;
@@ -65,6 +56,27 @@ static int	get_name(t_meta *d, int n)
 		i++;
 	}
 	if (space < 2 || number != 2)
+		return (ERROR);
+	return (SUCCESS);
+}
+
+static int	get_name(t_meta *d, int n)
+{
+	int i;
+
+	i = 0;
+	d->room_name[n] = d->parsing;
+	if (d->parsing[i] == '\n' || d->parsing[i] == 'L')
+		return (ERROR);
+	while (d->parsing[i] && d->parsing[i] != ' ')
+	{
+		if (d->parsing[i] == '\n')
+			return (ERROR);
+		i++;
+	}
+	if (!i)
+		return (ERROR);
+	if (!trim_after_name(d, i))
 		return (ERROR);
 	while (d->parsing[0] != '\n')
 		d->parsing++;

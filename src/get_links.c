@@ -1,36 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   links_parsing.c                                    :+:      :+:    :+:   */
+/*   get_links.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/24 04:38:23 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/05/18 17:06:58 by rcourtoi         ###   ########.fr       */
+/*   Created: 2020/05/22 20:00:21 by rcourtoi          #+#    #+#             */
+/*   Updated: 2020/05/22 20:02:14 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
-
-static int		skip_comment(t_meta *d, int i)
-{
-	int j;
-
-	j = i;
-	while (d->parsing[j] && d->parsing[j] != '\n')
-		j++;
-	j++;
-	return (j);
-}
-
-int				goto_next_c(t_meta *d, int *i, char c)
-{
-	while (d->parsing[*i] && d->parsing[*i] != c)
-		(*i)++;
-	if (!d->parsing[*i])
-		return (0);
-	return (1);
-}
 
 static int		enlarge_links(t_meta *d, char *first, char *second)
 {
@@ -70,8 +50,7 @@ static int		count_links(t_meta *d)
 		second = &d->parsing[i];
 		if (!goto_next_c(d, &i, '\n'))
 			break ;
-		d->parsing[i] = '\0';
-		i++;
+		d->parsing[i++] = '\0';
 		if (!enlarge_links(d, first, second))
 			break ;
 		links++;
