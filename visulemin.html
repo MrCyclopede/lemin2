@@ -88,7 +88,7 @@ function OrbitControls( object, domElement ) {
 	this.enablePan = true;
 	this.panSpeed = 1.0;
 	this.screenSpacePanning = false; // if true, pan in screen-space
-	this.keyPanSpeed = 7.0;	// pixels moved per arrow key push
+	this.keyPanSpeed = 7.0;// pixels moved per arrow key push
 
 	// Set to true to automatically rotate around the target
 	// If auto-rotate is enabled, you must call controls.update() in your animation loop
@@ -96,7 +96,7 @@ function OrbitControls( object, domElement ) {
 	this.autoRotateSpeed = 2.0; // 30 seconds per round when fps is 60
 
 	// Set to false to disable use of the keys
-	this.enableKeys = true;
+	this.enableKeys = false;
 
 	// The four arrow keys
 	this.keys = { LEFT: 37, UP: 38, RIGHT: 39, BOTTOM: 40 };
@@ -1262,7 +1262,7 @@ MapControls.prototype.constructor = THREE.MapControls;
 				data.links = {}
 				data.roundPeriod = 10000
 				data.time = 0
-				data.sendMode = true
+				data.sendMode = false
 				data.roundProgress = 0.0
 				data.minCoordinates = []
 				data.maxCoordinates = []
@@ -1420,6 +1420,8 @@ MapControls.prototype.constructor = THREE.MapControls;
 					sendRound()
 				} else if (keyCode === 82){
 					antsReset()
+				} else if (keyCode === 69){
+					sendMode = True;
 				}
 			};
 // END
