@@ -112,7 +112,7 @@ t_group			find_group(t_meta *d)
 	t_group	g;
 	t_path	p;
 	int		i;
-
+	
 	i = 0;
 	if (!init_find_group(d, &g, &p))
 		return (g);

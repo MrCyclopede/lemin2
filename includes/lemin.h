@@ -108,4 +108,5 @@ void			add_queue(t_meta *d, int value);
 void			reset_queue(t_meta *d);
 void			free_pathlist_rooms(int max_path, t_group *g);
 int				free_meta(t_meta *d);
+
 #endif

@@ -44,12 +44,12 @@ static int		count_links(t_meta *d)
 			i = skip_comment(d, i);
 		first = &d->parsing[i];
 		if (!goto_next_c(d, &i, '-'))
-			break ;
+			return (links);
 		d->parsing[i] = '\0';
 		i++;
 		second = &d->parsing[i];
 		if (!goto_next_c(d, &i, '\n'))
-			break ;
+			return (links);
 		d->parsing[i++] = '\0';
 		if (!enlarge_links(d, first, second))
 			break ;

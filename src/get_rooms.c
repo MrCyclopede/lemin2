@@ -19,7 +19,7 @@ static int	count_rooms(char *str)
 
 	i = 0;
 	rooms = 0;
-	while (str[i] && str[i] != '-')
+	while (str[i] && (str[i] != '-' || str[i - 1] == ' '))
 	{
 		if (str[i] == '\n')
 			rooms++;
@@ -44,13 +44,15 @@ static int	trim_after_name(t_meta *d, int i)
 	{
 		if (d->parsing[i] == ' ')
 			space++;
+		if (d->parsing[i] == '-' || d->parsing[i] == '+')
+			i++;
 		if (ft_isdigit(d->parsing[i]))
 		{
 			while (ft_isdigit(d->parsing[i + 1]))
 				i++;
 			number++;
 		}
-		if (((d->parsing[i] != ' ' && !ft_isdigit(d->parsing[i]))))
+		if (d->parsing[i] != ' ' && !ft_isdigit(d->parsing[i]) && d->parsing[0] != '-' && d->parsing[0] != '+')
 			return (ERROR);
 		d->parsing[i] = '\0';
 		i++;

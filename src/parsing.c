@@ -19,7 +19,7 @@ int		get_index(t_meta *d, char *room)
 	i = 0;
 	while (i < d->room_total)
 	{
-		if (ft_strstr(d->room_name[i], room))
+		if (!ft_strcmp(d->room_name[i], room))
 			return (i);
 		i++;
 	}
@@ -28,6 +28,12 @@ int		get_index(t_meta *d, char *room)
 
 int		get_ants(t_meta *d)
 {
+	while (d->parsing[0] == '#')
+	{
+		while (d->parsing[0] && d->parsing[0] != '\n')
+			d->parsing++;
+		d->parsing++;
+	}
 	d->ant_total = ft_atoi(d->parsing);
 	if (d->ant_total <= 0)
 		return (ERROR);
