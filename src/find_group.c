@@ -6,7 +6,7 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 03:05:42 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/05/22 19:56:07 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/06/02 20:15:18 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ t_group			find_group(t_meta *d)
 	t_group	g;
 	t_path	p;
 	int		i;
-	
+
 	i = 0;
 	if (!init_find_group(d, &g, &p))
 		return (g);

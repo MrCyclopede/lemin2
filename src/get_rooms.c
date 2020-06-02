@@ -6,7 +6,7 @@
 /*   By: rcourtoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 04:48:16 by rcourtoi          #+#    #+#             */
-/*   Updated: 2020/05/22 19:45:41 by rcourtoi         ###   ########.fr       */
+/*   Updated: 2020/06/02 20:22:00 by rcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ static int	trim_after_name(t_meta *d, int i)
 	space = 0;
 	while (d->parsing[i] && d->parsing[i] != '\n')
 	{
-		if (d->parsing[i] == ' ')
-			space++;
+		d->parsing[i] == ' ' ? space++ : (void)space;
 		if (d->parsing[i] == '-' || d->parsing[i] == '+')
 			i++;
 		if (ft_isdigit(d->parsing[i]))
@@ -52,7 +51,8 @@ static int	trim_after_name(t_meta *d, int i)
 				i++;
 			number++;
 		}
-		if (d->parsing[i] != ' ' && !ft_isdigit(d->parsing[i]) && d->parsing[0] != '-' && d->parsing[0] != '+')
+		if (d->parsing[i] != ' ' && !ft_isdigit(d->parsing[i])
+				&& d->parsing[0] != '-' && d->parsing[0] != '+')
 			return (ERROR);
 		d->parsing[i] = '\0';
 		i++;
